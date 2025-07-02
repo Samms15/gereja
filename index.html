@@ -23,6 +23,10 @@
   scroll-behavior: smooth;
   color: var(--dark);
 }
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+}
 
     
     section {
@@ -305,12 +309,13 @@ Kiranya Tuhan senantiasa menjadi pusat dari kehidupan rumah tangga kami.
     const audio = document.getElementById('background-audio');
     const toggleBtn = document.getElementById('toggle-music');
     function scrollToContent() {
-      document.getElementById('mempelai').scrollIntoView({ behavior: 'smooth' });
-      audio.play().catch(() => {});
-      mulaiSalju();
-      toggleBtn.style.display = 'flex';
-      toggleBtn.classList.add('spin');
-    }
+  document.body.classList.remove('no-scroll'); // izinkan scroll
+  document.getElementById('mempelai').scrollIntoView({ behavior: 'smooth' });
+  audio.play().catch(() => {});
+  mulaiSalju();
+  toggleBtn.style.display = 'flex';
+  toggleBtn.classList.add('spin');
+}
     toggleBtn.addEventListener('click', () => {
       if (audio.paused) {
         audio.play();
