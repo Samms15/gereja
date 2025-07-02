@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Wedding Of Januar Kristin & Yohan Renaldi</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&family=Libre+Baskerville&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold: #c6a664;
+      --cream: #f4efe6;
+      --dark: #3b2f20;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Libre Baskerville', serif;
+      background-color: var(--cream);
+      color: var(--dark);
+      scroll-behavior: smooth;
+    }
+    section {
+      padding: 60px 20px;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cover {
+      position: relative;
+      height: 100vh;
+      background-color: var(--cream);
+      background-image: url('https://i.ibb.co/5G2yhdc/batik-pattern.png');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 12px double var(--gold);
+      box-shadow: 0 0 30px rgba(198, 166, 100, 0.3);
+      overflow: hidden;
+      text-align: center;
+    }
+    .cover::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(244, 239, 230, 0.88);
+      backdrop-filter: blur(2px);
+      z-index: 1;
+    }
+    .cover-content { position: relative; z-index: 2; }
+    .ornament-top, .ornament-bottom {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 220px;
+      opacity: 0.85;
+      z-index: 2;
+    }
+    .ornament-top { top: -20px; }
+    .ornament-bottom { bottom: -60px; }
+    .cover h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.8em;
+      color: var(--gold);
+      margin-bottom: 15px;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
+    }
+    .cover p { font-size: 1.1em; margin: 8px 0; }
+    .btn {
+      background: linear-gradient(45deg, #d4af37, #c6a664);
+      color: white;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+    .btn:hover {
+      background: linear-gradient(45deg, #b8973c, #a9822e);
+      transform: scale(1.05);
+    }
+    h2 {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 2em;
+      text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    }
+    .line {
+      width: 60px;
+      height: 2px;
+      background-color: var(--gold);
+      margin: 16px auto;
+    }
+    .photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid var(--gold);
+      margin: 10px;
+    }
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+    .gallery img {
+      width: 150px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--gold);
+    }
+    .jadwal-box {
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      max-width: 320px;
+      margin: 20px auto;
+      padding: 16px 20px;
+      background-color: #f9f6f0;
+      box-shadow: 0 4px 6px rgba(198, 166, 100, 0.15);
+      font-size: 1em;
+      color: var(--dark);
+      line-height: 1.5em;
+      text-align: left;
+      position: relative;
+    }
+    .jadwal-box strong {
+      display: block;
+      font-size: 1.2em;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+    .btn-location {
+      background: var(--gold);
+      color: var(--cream);
+      font-weight: bold;
+      padding: 8px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(198, 166, 100, 0.7);
+      font-size: 1em;
+      margin-top: 15px;
+      transition: background 0.3s ease, transform 0.3s ease;
+      display: block;
+      width: fit-content;
+      text-align: center;
+    }
+    .btn-location:hover { background: #b8973c; transform: scale(1.05); }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    #toggle-music {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--gold);
+      border: none;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(198, 166, 100, 0.8);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 6px;
+      z-index: 1000;
+      transition: background 0.3s ease;
+    }
+    #toggle-music:hover { background: #b8973c; }
+    #toggle-music img { width: 40px; height: 40px; pointer-events: none; }
+    #toggle-music.spin img { animation: spin 3s linear infinite; }
+    #salju-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .photo-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.photo-item {
+  text-align: center;
+}
+
+.photo-name {
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 1.1em;
+  color: var(--dark);
+}
+
+  </style>
+</head>
+<body class="no-scroll">
+  <audio id="background-audio" src="Musik.mp3" loop></audio>
+  <div class="cover" id="cover">
+    <img src="Ornamen atas.png" class="ornament-top" alt="ornament atas" />
+    <div class="cover-content">
+      <h1>Undangan Pernikahan</h1>
+      <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+      <p>Dengan penuh cinta dan hormat, kami mengundang Anda</p>
+      <button class="btn" onclick="scrollToContent()">Buka Undangan</button>
+    </div>
+    <img src="Ornamen bawah.png" class="ornament-bottom" alt="ornament bawah" />
+  </div>
+
+  <section id="mempelai">
+    <h2>Januar Kristin<br>&<br>Yohan Renaldi</h2>
+    <div class="line"></div>
+    <p>
+Dengan sukacita yang mendalam dan kasih yang mempersatukan, <br>
+kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri hari bahagia kami, <br>
+saat dua hati dipersatukan dalam perjanjian kudus pernikahan.
+</p>
+  </section>
+
+  <section id="syukur">
+    <h2>Ucapan Syukur</h2>
+    <div class="line"></div>
+    <p style="margin-top: 30px; font-style: italic; color: #5a4322;">
+"Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia." <br>
+— Matius 19:6
+</p>
+    <p>
+Dengan segala kerendahan hati, kami mengucap syukur kepada Tuhan, <br>
+karena oleh kasih dan penyertaan-Nya, kami dipertemukan dan dikuatkan untuk melangkah bersama dalam kasih yang kudus. <br>
+Kiranya Tuhan senantiasa menjadi pusat dari kehidupan rumah tangga kami.
+</p>
+  </section>
+
+ <section id="foto">
+  <h2>Foto Mempelai</h2>
+  <div class="line"></div>
+  <div class="photo-wrapper">
+    <div class="photo-item">
+      <img src="kristin.JPEG" alt="Kristin" class="photo" />
+      <p style="font-size: 1.2em; font-weight: bold; margin: 8px 0 4px;">Januar Kristin</p>
+      <p style="font-size: 0.9em; color: #555; margin: 0;">Putri dari Ibu Ati dan Bapak David</p>
+    </div>
+    <div class="photo-item">
+      <img src="yohan.JPEG" alt="Yohan" class="photo" />
+      <p style="font-size: 1.2em; font-weight: bold; margin: 8px 0 4px;">Yohan Renaldi</p>
+      <p style="font-size: 0.9em; color: #555; margin: 0;">Putra dari Ibu Dewi dan Bapak Toni</p>
+    </div>
+  </div>
+</section>
+
+  <section id="jadwal">
+    <h2>Jadwal Acara</h2>
+    <div class="line"></div>
+    <div class="jadwal-box">
+      <strong>Pemberkatan</strong>
+      <p>📅 Minggu, 15 September 2025</p>
+      <p>🕐 Pukul 10.00 WIB</p>
+      <p>📍 GKKD Bandung Barat</p>
+      <button class="btn-location" onclick="openLocation('GKKD Bandung Barat')">Lihat Lokasi</button>
+    </div>
+   
+    <div id="countdown" style="margin-top: 40px; font-size: 1.5em; color: var(--gold); font-weight: bold;"></div>
+  </section>
+
+  <section id="galeri">
+    <h2>Galeri Foto</h2>
+    <div class="line"></div>
+    <div class="gallery">
+      <img src="foto 1.JPEG" alt="Galeri 1" />
+      <img src="foto 2.JPEG" alt="Galeri 2" />
+      <img src="foto 3.JPEG" alt="Galeri 3" />
+      <img src="foto 4.JPEG" alt="Galeri 4" />
+    </div>
+  </section>
+
+  <button id="toggle-music" title="Hidupkan / Matikan Musik">
+    <img src="Kaset.png" alt="Toggle Musik" />
+  </button>
+
+  <canvas id="salju-canvas"></canvas>
+
+  <script>
+    const audio = document.getElementById('background-audio');
+    const toggleBtn = document.getElementById('toggle-music');
+    function scrollToContent() {
+      document.getElementById('mempelai').scrollIntoView({ behavior: 'smooth' });
+      audio.play().catch(() => {});
+      mulaiSalju();
+      toggleBtn.style.display = 'flex';
+      toggleBtn.classList.add('spin');
+    }
+    toggleBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        toggleBtn.classList.add('spin');
+      } else {
+        audio.pause();
+        toggleBtn.classList.remove('spin');
+      }
+    });
+    function openLocation(place) {
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(place)}`;
+      window.open(url, '_blank');
+    }
+    // Salju animasi
+    const canvas = document.getElementById('salju-canvas');
+    const ctx = canvas.getContext('2d');
+    let width, height, flakes = [];
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width;
+      canvas.height = height;
+    }
+    window.addEventListener('resize', resize);
+    resize();
+    function createFlakes(count) {
+      flakes = [];
+      for (let i = 0; i < count; i++) {
+        flakes.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          radius: Math.random() * 3 + 1,
+          speed: Math.random() * 1 + 0.5,
+          opacity: Math.random() * 0.5 + 0.3,
+        });
+      }
+    }
+    function drawFlakes() {
+      ctx.clearRect(0, 0, width, height);
+      ctx.fillStyle = 'rgba(198, 166, 100, 0.8)';
+      ctx.beginPath();
+      for (const f of flakes) {
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.radius, 0, Math.PI * 2);
+      }
+      ctx.fill();
+      updateFlakes();
+    }
+    function updateFlakes() {
+      for (const f of flakes) {
+        f.y += f.speed;
+        if (f.y > height) {
+          f.y = 0;
+          f.x = Math.random() * width;
+        }
+      }
+    }
+    let snowInterval;
+    function mulaiSalju() {
+      createFlakes(80);
+      if (snowInterval) clearInterval(snowInterval);
+      snowInterval = setInterval(drawFlakes, 30);
+    }
+    const sections = document.querySelectorAll('section');
+    function checkVisible() {
+      const triggerBottom = window.innerHeight * 0.85;
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < triggerBottom) {
+          section.classList.add('visible');
+        }
+      });
+    }
+    window.addEventListener('scroll', checkVisible);
+    window.addEventListener('load', checkVisible);
+
+    // Countdown
+    function updateCountdown() {
+      const eventDate = new Date("2025-07-19T00:00:00").getTime();
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      if (distance <= 0) {
+        document.getElementById("countdown").innerHTML = "Hari ini adalah hari pernikahan! 🎉";
+        clearInterval(countdownInterval);
+        return;
+      }
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("countdown").innerHTML = `Menuju Hari Bahagia: <br>${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+    }
+    const countdownInterval = setInterval(updateCountdown, 1000);
+    updateCountdown();
+  </script>
+</body>
+</html>
