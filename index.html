@@ -218,6 +218,12 @@
   color: var(--dark);
 }
 
+section {
+  padding: 60px 20px;
+  text-align: center; /* ini yang memastikan <h2> dan <div> center */
+}
+
+
   </style>
 </head>
 <body class="no-scroll">
@@ -288,15 +294,27 @@ Kiranya Tuhan senantiasa menjadi pusat dari kehidupan rumah tangga kami.
     <div id="countdown" style="margin-top: 40px; font-size: 1.5em; color: var(--gold); font-weight: bold;"></div>
   </section>
 
+<section id="doa">
+  <h2>Ucapan & Doa</h2>
+  <div class="line"></div>
+
   <form id="form-doa" onsubmit="kirimDoa(event)" style="max-width: 400px; margin: auto; text-align: left;">
-  <label for="nama">Nama Anda:</label>
-  <input type="text" id="nama" name="nama" required placeholder="Masukkan nama" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;" />
+    <label for="nama">Nama Anda:</label>
+    <input type="text" id="nama" name="nama" required placeholder="Masukkan nama"
+      style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;" />
 
-  <label for="isi">Ucapan Doa:</label>
-  <textarea id="isi" name="isi" required placeholder="Tulis doa Anda..." rows="4" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+    <label for="isi">Ucapan Doa:</label>
+    <textarea id="isi" name="isi" required placeholder="Tulis doa Anda..." rows="4"
+      style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;"></textarea>
 
-  <button type="submit" class="btn" style="width: 100%;">Kirim Doa</button>
-</form>
+    <button type="submit" class="btn" style="width: 100%;">Kirim Doa</button>
+  </form>
+
+  <p id="notifikasi" style="text-align:center; color: green; margin-top: 20px;"></p>
+</section>
+
+
+
 
   <section id="galeri">
     <h2>Galeri Foto</h2>
