@@ -281,12 +281,22 @@ Kiranya Tuhan senantiasa menjadi pusat dari kehidupan rumah tangga kami.
       <strong>Pemberkatan</strong>
       <p>📅 Minggu, 20 Juli 2025</p>
       <p>🕐 Pukul 08.00 - 11.00 WIB</p>
-      <p>📍 GKKD Bandung Barat</p>
+      <p>📍 GKKD Cibogo Bandung</p>
       <button class="btn-location" onclick="openLocation('GKKD Bandung Barat')">Lihat Lokasi</button>
     </div>
    
     <div id="countdown" style="margin-top: 40px; font-size: 1.5em; color: var(--gold); font-weight: bold;"></div>
   </section>
+
+  <form id="form-doa" onsubmit="kirimDoa(event)" style="max-width: 400px; margin: auto; text-align: left;">
+  <label for="nama">Nama Anda:</label>
+  <input type="text" id="nama" name="nama" required placeholder="Masukkan nama" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;" />
+
+  <label for="isi">Ucapan Doa:</label>
+  <textarea id="isi" name="isi" required placeholder="Tulis doa Anda..." rows="4" style="width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc;"></textarea>
+
+  <button type="submit" class="btn" style="width: 100%;">Kirim Doa</button>
+</form>
 
   <section id="galeri">
     <h2>Galeri Foto</h2>
@@ -410,6 +420,24 @@ Kiranya Tuhan senantiasa menjadi pusat dari kehidupan rumah tangga kami.
     }
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown();
+
+    function kirimDoa(e) {
+  e.preventDefault();
+  const nama = document.getElementById("nama").value.trim();
+  const isi = document.getElementById("isi").value.trim();
+
+  if (!nama || !isi) {
+    alert("Harap isi nama dan doa.");
+    return;
+  }
+
+  const pesan = `*Ucapan & Doa Pernikahan*\nDari: ${nama}\n\n" ${isi}"`;
+  const nomorTujuan = "6285947072207"; // ganti dengan nomor kamu
+  const url = `https://wa.me/${nomorTujuan}?text=${encodeURIComponent(pesan)}`;
+
+  window.open(url, "_blank"); // buka WhatsApp
+}
+
   </script>
 </body>
 </html>
